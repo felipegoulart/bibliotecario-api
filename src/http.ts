@@ -1,12 +1,14 @@
 import Fastify from 'fastify'
-import fastifyJwt from '@fastify/jwt'
 import fastifyCors from '@fastify/cors'
+import fastifyRequestContext from '@fastify/request-context'
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
-import { env } from './env'
 import { authRoutes } from './routes/auth-routes'
+import { bookRoutes } from './routes/book-routes'
+import authPlugin from './plugins/auth-plugin'
+import { env } from './env'
 
 const app = Fastify({
-  logger: true
+  logger: env.NODE_ENV !== 'test'
 })
 
 app.setValidatorCompiler(validatorCompiler)
@@ -17,11 +19,13 @@ app.register(fastifyCors, {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 })
 
-app.register(fastifyJwt, {
-  secret: env.JWT_SECRET,
-  sign: { expiresIn: '3d' }
+app.register(fastifyRequestContext, {
+  hook: 'onRequest'
 })
 
+app.register(authPlugin)
+
 app.register(authRoutes, { prefix: 'auth' })
+app.register(bookRoutes, { prefix: 'books' })
 
 export { app }

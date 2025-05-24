@@ -16,7 +16,8 @@ datasource db {
 
 model User {
   id        String    @id @db.Char(26)
-  email     String    @unique @db.Char(255)
+  email     String    @unique @db.VarChar(255)
+  name      String    @db.VarChar(255)
   password  String
   books     Book[]
   createdAt DateTime  @default(now()) @map("created_at")

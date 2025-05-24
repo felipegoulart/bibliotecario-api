@@ -2,7 +2,7 @@ import { afterAll, beforeEach, beforeAll, describe, expect, it, vi } from 'vites
 import { app } from '@src/http'
 import { prisma } from '@src/infra/database/prisma'
 
-describe('FUNCTIONAL: Identity', () => {
+describe('FUNCTIONAL: Authentication', () => {
   beforeEach(async () => {
     await prisma.$executeRawUnsafe(`TRUNCATE TABLE "users" RESTART IDENTITY CASCADE;`)
   })
