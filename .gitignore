@@ -1,7 +1,7 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Prisma
-src/generated
+generated
 
 # Logs
 
@@ -176,3 +176,5 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+/generated/prisma

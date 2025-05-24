@@ -1,0 +1,12 @@
+name: 'bibliotecario'
+
+services:  
+  database:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: bibliotecario
