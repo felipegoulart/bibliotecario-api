@@ -7,6 +7,10 @@ export class AuthorRepository {
   }
 
   async findMany(): Promise<Author[]> {
-    return await prisma.author.findMany()
+    return await prisma.author.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
   }
 }

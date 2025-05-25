@@ -39,7 +39,7 @@ model Book {
   updatedAt   DateTime  @updatedAt @map("updated_at")
   deletedAt   DateTime? @map("deleted_at")
 
-  location    Location?  @relation(fields: [locationId], references: [id])
+  Location    Location?  @relation(fields: [locationId], references: [id])
   locationId  String?    @db.Char(26)
   Author      Author?    @relation(fields: [authorId], references: [id])
   authorId    String?    @db.Char(26)

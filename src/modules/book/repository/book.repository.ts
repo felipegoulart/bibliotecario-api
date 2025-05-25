@@ -6,7 +6,34 @@ export class BookPrismaRepository {
     return await prisma.book.create({ data: payload })
   }
 
-  async findMany(): Promise<Book[]> {
-    return await prisma.book.findMany()
+  async findMany() {
+    return await prisma.book.findMany({
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        Publisher: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
+        Author: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
+        Location: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
   }
 }

@@ -7,7 +7,11 @@ export class LocationRepository {
   }
 
   async findMany(): Promise<Location[]> {
-    return await prisma.location.findMany()
+    return await prisma.location.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
   }
 
   async findOne(id: string): Promise<Location | null> {
