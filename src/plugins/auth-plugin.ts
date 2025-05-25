@@ -1,8 +1,7 @@
 import { fastifyPlugin } from 'fastify-plugin'
-import type { FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
+import type { FastifyInstance, FastifyPluginCallback, FastifyReply, FastifyRequest } from 'fastify'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '@src/env'
-import type { FastifyPluginCallbackZod } from 'fastify-type-provider-zod'
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -18,10 +17,8 @@ declare module '@fastify/jwt' {
   }
 }
 
-const authPlugin: FastifyPluginCallbackZod = (server, _, done) => {
-  server.register(fastifyJwt, { secret: env.JWT_SECRET, sign: { expiresIn: '1d' } })
-
-  server.decorate('authenticate', async (request: FastifyRequest, reply: FastifyReply) => {
+const authPlugin: FastifyPluginCallback = (app: FastifyInstance, _, done) => {
+  app.decorate('authenticate', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       await request.jwtVerify()
     } catch (error) {

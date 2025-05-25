@@ -17,10 +17,10 @@ export const register = async (
 
     await registerUseCase.execute({ email, password, name })
 
-    return reply.status(StatusCodes.CREATED).send(ReasonPhrases.CREATED)
+    return reply.status(StatusCodes.CREATED).send({ message: ReasonPhrases.CREATED })
   } catch (error) {
-    if (error instanceof ZodError) {
-      return reply.status(StatusCodes.BAD_REQUEST).send(error.message)
-    }
+    console.error(error)
+
+    throw error
   }
 }
