@@ -1,7 +1,7 @@
 import { ulid } from 'ulid'
 import { afterAll, beforeAll, describe, expect, it, test } from 'vitest'
 
-import type { InputBookCreateDto } from '../dto/input-dto'
+import type { InputBookCreateDto } from '../dto/create.dto'
 import type { Prisma } from '@src/infra/database/generated/prisma'
 import { Password } from '@src/modules/identity/value-objects/password'
 import { app } from '@src/http'

@@ -16,6 +16,10 @@ CREATE TABLE "books" (
     "id" CHAR(26) NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "published_at" DATE,
+    "borrowed" BOOLEAN NOT NULL DEFAULT false,
+    "borrowed_to" TEXT,
+    "borrowed_at" TIMESTAMP(3),
+    "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "deleted_at" TIMESTAMP(3),
@@ -53,6 +57,7 @@ CREATE TABLE "Publisher" (
 CREATE TABLE "Location" (
     "id" CHAR(26) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "deleted_at" TIMESTAMP(3),

@@ -13,9 +13,9 @@ export const authenticate = async (
   request: FastifyRequest<{ Body: inputAuthenticateLoginDto }>,
   reply: FastifyReply
 ) => {
-  try {
-    const { email, password } = inputAuthenticateLoginSchema.parse(request.body)
+  const { email, password } = inputAuthenticateLoginSchema.parse(request.body)
 
+  try {
     const authenticateUseCase = new AuthenticateUseCase()
     const { id } = await authenticateUseCase.execute({ email, password })
 
@@ -30,8 +30,8 @@ export const authenticate = async (
 
     reply.status(StatusCodes.OK).send({ accessToken })
   } catch (error) {
-    if (error instanceof ZodError) {
-      return reply.status(StatusCodes.BAD_REQUEST).send({ message: error.message })
-    }
+    console.error(error)
+
+    throw error
   }
 }

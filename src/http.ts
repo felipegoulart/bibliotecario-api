@@ -9,6 +9,9 @@ import { identityRoutes } from './modules/identity/routes'
 import fastifyJwt from '@fastify/jwt'
 import { z, ZodError } from 'zod/v4'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+import { authorRoutes } from './modules/author/routes'
+import { publisherRoutes } from './modules/publisher/routes'
+import { locationRoutes } from './modules/location/routes'
 
 const app = Fastify({
   logger: env.NODE_ENV !== 'test'
@@ -34,6 +37,9 @@ app.register(authPlugin)
 
 app.register(identityRoutes, { prefix: '/auth' })
 app.register(bookRoutes, { prefix: '/books' })
+app.register(authorRoutes, { prefix: '/authors' })
+app.register(publisherRoutes, { prefix: '/publishers' })
+app.register(locationRoutes, { prefix: '/locations' })
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
