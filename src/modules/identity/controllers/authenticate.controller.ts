@@ -7,7 +7,7 @@ import {
   inputAuthenticateLoginSchema,
   type inputAuthenticateLoginDto
 } from '../dto/authenticate.dto'
-import { AuthenticateUseCase } from '../use-case/authenticate.user-case'
+import { AuthenticateUseCase } from '../use-case/authenticate.use-case'
 
 export const authenticate = async (
   request: FastifyRequest<{ Body: inputAuthenticateLoginDto }>,
