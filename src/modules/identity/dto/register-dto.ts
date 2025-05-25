@@ -1,7 +1,7 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 export const inputUserRegisterDto = z.object({
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
   name: z.string().min(3)
 })

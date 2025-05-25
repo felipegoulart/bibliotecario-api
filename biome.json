@@ -15,7 +15,7 @@
     "indentStyle": "space",
     "bracketSpacing": true,
     "lineEnding": "crlf",
-    "lineWidth": 120,
+    "lineWidth": 100,
     "attributePosition": "multiline"
   },
   "organizeImports": {

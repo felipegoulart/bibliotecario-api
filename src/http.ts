@@ -1,18 +1,15 @@
 import Fastify from 'fastify'
 import fastifyCors from '@fastify/cors'
 import fastifyRequestContext from '@fastify/request-context'
-import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
-import { authRoutes } from './routes/auth-routes'
-import { bookRoutes } from './routes/book-routes'
+
 import authPlugin from './plugins/auth-plugin'
+import { bookRoutes } from './modules/book/routes'
 import { env } from './env'
+import { identityRoutes } from './modules/identity/routes'
 
 const app = Fastify({
   logger: env.NODE_ENV !== 'test'
 })
-
-app.setValidatorCompiler(validatorCompiler)
-app.setSerializerCompiler(serializerCompiler)
 
 app.register(fastifyCors, {
   credentials: true,
@@ -25,7 +22,7 @@ app.register(fastifyRequestContext, {
 
 app.register(authPlugin)
 
-app.register(authRoutes, { prefix: 'auth' })
+app.register(identityRoutes, { prefix: 'auth' })
 app.register(bookRoutes, { prefix: 'books' })
 
 export { app }
